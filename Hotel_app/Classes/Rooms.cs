@@ -44,6 +44,10 @@ class Rooms : Entity
         PricePerNight = pricePerNight;
         UpdateTimestamp();
     }
+    public string DetailedDescription()
+    {
+        return $"[{Id}] Room {RoomNumber} | {Floor} floor | {Category} | {Capacity} people | {PricePerNight:0.00} eur/night | reservations {reservationCount}";
+    }
     public override string Describe()
     {
         return $"Room {RoomNumber} | {Floor} floor | {Category} | {Capacity} people | {PricePerNight:0.00} eur/night";
