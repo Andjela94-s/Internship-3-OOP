@@ -1,9 +1,8 @@
-namespace Hotel_app
+namespace Hotel_app.Enums;
+
+public enum ShiftType
 {
-    public enum ShiftType
-    {
-        Morning,
-        Afternoon,
-        Night
-    }
+    Morning,
+    Afternoon,
+    Night
 }

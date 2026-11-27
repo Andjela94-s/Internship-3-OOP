@@ -1,9 +1,8 @@
-namespace Hotel_app
+namespace Hotel_app.Enums;
+
+public enum EmployeePosition
 {
-    public enum EmployeePosition
-    {
-        Cook,
-        Receptionist,
-        Housekeeper
-    }
+    Cook,
+    Receptionist,
+    Housekeeper
 }

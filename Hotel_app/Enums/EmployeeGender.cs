@@ -1,9 +1,7 @@
-namespace Hotel_app
+namespace Hotel_app.Enums;
+
+public enum EmployeeGender
 {
-    public enum EmployeeGender
-    {
-        Male,
-        Female,
-        Other
-    }
+    Male,
+    Female,
 }

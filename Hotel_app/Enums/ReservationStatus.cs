@@ -1,9 +1,8 @@
-namespace Hotel_app
+namespace Hotel_app.Enums;
+
+public enum ReservationStatus
 {
-    public enum ReservationStatus
-    {
-        Confirmed,
-        Cancelled,
-        Finished
-    }
+    Confirmed,
+    Cancelled,
+    Finished
 }

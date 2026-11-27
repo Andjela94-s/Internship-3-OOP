@@ -1,9 +1,8 @@
-namespace Hotel_app
+namespace Hotel_app.Enums;
+
+public enum RoomCategory
 {
-    public enum RoomCategory
-    {
-        Standard,
-        Deluxe,
-        Suite
-    }
+    Standard,
+    Deluxe,
+    Suite
 }
