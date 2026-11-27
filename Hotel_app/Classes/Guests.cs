@@ -33,10 +33,10 @@ namespace Hotel_app.Classes;
             throw new ArgumentException("Password cannot be null or empty and must be at least 6 characters long.", nameof(password));
         }
 
-        Name = name;
-        LastName = lastName;
+        Name = name.Trim();
+        LastName = lastName.Trim();
         BirthYear = birthYear;
-        Email = email;
+        Email = email.Trim();
         Password = password;
     }
     public bool VerifyPassword(string password)
@@ -50,6 +50,20 @@ namespace Hotel_app.Classes;
         Email = newEmail.Trim();
         UpdateTimestamp();
     }
+    public bool ToggleFavoriteRoom(Room room)
+    {
+        var exist = _favoriteRooms.FirstOrDefault(r => r.Id == room.Id);
+        if(exist != null)
+        {
+            _favoriteRooms.Remove(existing);
+            UpdateTimestamp();
+            return false;
+        }
+        _favoriteRooms.Add(room);
+        UpdateTimestamp();
+        return true;
+    }
+    public bool IsFavorite(Room room) =>   _favoriteRoom.Any(r => r.Id == room.Id);
     public override string Describe()
     {
         return $"Guest: {Name} {LastName}, Email: {Email}";
