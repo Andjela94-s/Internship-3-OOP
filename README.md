@@ -16,4 +16,3 @@ How to use:
 
 Attention:
 This app doesn't use secure heshing for password, but rather saves it as a string.
-
