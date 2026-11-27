@@ -26,10 +26,8 @@ public class Reservations: Entity
         {
             throw new ArgumentException("Check-in date must be earlier than check-out date.");
         }
-        Guest = guest;
-        Room = room;
-        CheckInDate = checkInDate;
-        CheckOutDate = checkOutDate;
+        CheckInDate = checkInDate.Date;
+        CheckOutDate = checkOutDate.Date;
         Status = ReservationStatus.Confirmed;
     }
     public static void ValidateReservationDates(DateTime checkInDate, DateTime checkOutDate)
@@ -54,6 +52,10 @@ public class Reservations: Entity
     {
         return Status == ReservationStatus.Confirmed && (CheckInDate - DateTime.Now).TotalHours > 48;
     }
+    public bool CanBeDeleted()
+    {
+        return Status != ReservationStatus.Finished && (CheckInDate - DateTime.Now).TotalHours > 48;
+    }
     public void CancelReservation()
     {
         if (!CanBeCancelled())
@@ -72,10 +74,22 @@ public class Reservations: Entity
         Status = ReservationStatus.Completed;
         UpdateTimestamp();
     }
+    public void GetStatus() => Status switch
+    {
+        ReservationStatus.Confirmed => "Status: confirmed",
+        ReservationStatus.Cancelled => "Status: cancelled",
+        ReservationStatus.Finished => "Status: finished",
+        _ => Status.Describe()
+    };
+    public string GuestDescribe()
+    {
+        return $"[{Id}] Room {Room.RoomNumber} ({Room.Category}) | {CheckInDate:yyyy-MM-dd} -> {CheckOutDate:yyyy-MM-dd}" +
+            $"| Nights: {NumberOfNights}Total Price: {TotalPrice:0.00}| Status: {GetStatus()}";
+    }
     public override string Describe()
     {
         return $"{Id} {Guest.Name} {Guest.LastName}|Room: {Room.RoomNumber}|" +
-            $"{CheckInDate.ToShortDateString()} -> {CheckOutDate.ToShortDateString()}| Nights: {NumberOfNights}|" +
-            $",Total Price: {TotalPrice:C}| Status: {Status}";
+            $"{CheckInDate:yyyy-MM-dd} -> {CheckOutDate:yyyy-MM-dd}| Nights: {NumberOfNights}|" +
+            $",Total Price: {TotalPrice:0.00}| Status: {GetStatus()}";
     }
 }
